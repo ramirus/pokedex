@@ -12,7 +12,7 @@ class AppContainer extends Component {
                     handlePokemonSubmit={() => {}}
                 />
                 <PokemonList
-
+                    pokemonArray={[]}
                 />
             </div>
         );

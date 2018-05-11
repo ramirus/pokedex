@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
+import {array} from 'prop-types';
 
 import PokemonItem from '../PokemonItem';
 
 class PokemonList extends Component {
+    static propTypes = {
+        pokemonArray: array.isRequired,
+    };
+
     render() {
+        const {pokemonArray} = this.props;
         return (
-            <div className="App">
-                <header className="App-header">
-                    <h1 className="App-title">Welcome to React</h1>
-                </header>
-                <p className="App-intro">
-                    To get started, edit <code>src/App.js</code> and save to reload.
-                </p>
+            <div className="pokemon-list">
+                {pokemonArray.map((item, index) => (
+                    <PokemonItem
+                        key={index}
+                        pokemon={item}
+                    />
+                ))}
             </div>
         );
     }
