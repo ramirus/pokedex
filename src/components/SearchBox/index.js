@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
+import {func} from 'prop-types';
+import {DebounceInput} from 'react-debounce-input';
 
 class SearchBox extends Component {
+    static propTypes = {
+        handlePokemonSubmit: func.isRequired,
+    };
+
     state = {
         value: ''
     };
 
+    handleInput = (e) => {
+        let value = e.target.value;
+        this.setState({
+            value: value
+        });
+        this.props.handlePokemonSubmit(value);
+    };
+
     render() {
         return (
-            <input
-                type="text"
-                onChange={this.handleInput}
-                value={this.state.inputValue}
+            <DebounceInput
+                debounceTimeout={300}
+                onChange={e => this.handleInput(e)}
                 placeholder="Input pokemon name"
             />
         );
