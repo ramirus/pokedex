@@ -10,7 +10,7 @@ import SearchBox from '../../components/SearchBox';
 class AppContainer extends Component {
     render() {
         const {
-            pokemons,
+            pokemonShowArray,
             isLoading,
             isError,
             pokemonsDetail,
@@ -18,7 +18,7 @@ class AppContainer extends Component {
         return (
             <div className="App">
                 <SearchBox
-                    handlePokemonSubmit={() => {}}
+                    handlePokemonInput={this.props.handlePokemonInput}
                 />
                 {
                     isLoading &&
@@ -29,7 +29,7 @@ class AppContainer extends Component {
                     <span>is error</span>
                 }
                 <PokemonList
-                    pokemonArray={pokemons || []}
+                    pokemonArray={pokemonShowArray || []}
                     pokemonsDetail={pokemonsDetail || new Map()}
                     requestDetailInfo={this.props.requestDetailInfo}
                 />
@@ -40,18 +40,15 @@ class AppContainer extends Component {
 
 const mapStateToProps = state => ({
     pokemonsReducer: state.pokemonsReducer,
-    // slider: state.rootReducer.productsReducer.slider,
-    // basket: state.rootReducer.basketReducer.basket
 });
 
 const mapDispatchToProps = dispatch => ({
     requestDetailInfo: (url) => {
         dispatch({type: 'REQUEST_DETAIL_INFO', payload: url})
+    },
+    handlePokemonInput: (inputValue) => {
+        dispatch({type: 'HANDLE_POKEMON_INPUT', payload: inputValue})
     }
-    // productsActions: bindActionCreators(actions, dispatch),
-    // changePage: bindActionCreators({
-    //     changePage: () => push('/about-us'),
-    // }, dispatch),
 });
 
 export default connect(

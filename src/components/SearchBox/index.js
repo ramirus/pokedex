@@ -4,7 +4,7 @@ import {DebounceInput} from 'react-debounce-input';
 
 class SearchBox extends Component {
     static propTypes = {
-        handlePokemonSubmit: func.isRequired,
+        handlePokemonInput: func.isRequired,
     };
 
     state = {
@@ -16,7 +16,7 @@ class SearchBox extends Component {
         this.setState({
             value: value
         });
-        this.props.handlePokemonSubmit(value);
+        this.props.handlePokemonInput(value);
     };
 
     render() {
