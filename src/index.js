@@ -1,6 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux'
+
 import './index.css';
+import store from './store'
+import rootSaga from './sagas'
 import AppContainer from './container/AppContainer';
 
-ReactDOM.render(<AppContainer />, document.getElementById('root'));
+store.runSaga(rootSaga);
+
+ReactDOM.render(
+    <Provider store={store}>
+        <AppContainer />
+    </Provider>,
+    document.getElementById('root')
+);

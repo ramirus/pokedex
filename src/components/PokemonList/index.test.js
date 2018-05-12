@@ -21,6 +21,8 @@ describe("PokemonList", () => {
     beforeEach(() => {
         props = {
             pokemonArray: [],
+            pokemonsDetail: new Map(),
+            requestDetailInfo: () => {},
         };
         mountedScreen = undefined;
     });
