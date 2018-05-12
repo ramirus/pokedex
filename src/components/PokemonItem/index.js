@@ -19,7 +19,7 @@ class PokemonItem extends Component {
         } = this.props;
         // check if data already loaded
         if(!pokemonDetail) {
-            requestDetailInfo(pokemon.url);
+            requestDetailInfo(pokemon);
         }
     }
 

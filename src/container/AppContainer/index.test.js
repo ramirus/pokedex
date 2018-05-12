@@ -63,7 +63,5 @@ describe("AppContainer", () => {
             label.simulate('click');
             expect(removeFunc).toHaveBeenCalled();
         });
-
-
     })
 });

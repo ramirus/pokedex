@@ -14,16 +14,26 @@ const getApi = (path) =>
 
         });
 
+const getFromLocalStorage = (name) =>
+    Promise.resolve(localStorage.getItem(name))
+        .then(response => JSON.parse(response));
+
+const setToLocalStorage = (pokemon) => localStorage.setItem(pokemon.name, JSON.stringify(pokemon));
+
 
 export function* requestDetailInfo(action) {
-    const pokemonDetailInfo = yield call(getApi, action.payload);
+    let pokemonDetailInfo = yield call(getFromLocalStorage, action.payload.name);
+    if(!pokemonDetailInfo) {
+        pokemonDetailInfo = yield call(getApi, action.payload.url);
+        yield call(setToLocalStorage, pokemonDetailInfo);
+    }
     yield put(actions.receivePokemonDetailInfo(pokemonDetailInfo));
 }
 
 export function* fetchPokemons() {
     yield put(actions.requestPokemons());
     const pokemons = yield call(getApi, URL + 'pokemon/?limit=1000');
-    if(pokemons === 'error') {
+    if (pokemons === 'error') {
         put(actions.requestPokemonsFailed());
     } else {
         yield put(actions.receivePokemons(pokemons.results));
@@ -33,7 +43,7 @@ export function* fetchPokemons() {
 export function* requestTypeInfo(action) {
     yield put(actions.requestTypeInfo());
     const pokemons = yield call(getApi, action.payload.url);
-    if(pokemons === 'error') {
+    if (pokemons === 'error') {
         put(actions.requestTypeInfoFailed());
     } else {
         yield put(actions.receiveTypeInfo(pokemons));

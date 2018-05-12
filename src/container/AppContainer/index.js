@@ -70,8 +70,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    requestDetailInfo: (url) => {
-        dispatch({type: 'REQUEST_DETAIL_INFO', payload: url})
+    requestDetailInfo: (pokemon) => {
+        dispatch({type: 'REQUEST_DETAIL_INFO', payload: pokemon})
     },
     handlePokemonInput: (inputValue) => {
         dispatch({type: 'HANDLE_POKEMON_INPUT', payload: inputValue})
