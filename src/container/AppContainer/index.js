@@ -1,28 +1,54 @@
 import React, { Component } from 'react';
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
+import {func, object} from 'prop-types';
+import {connect} from 'react-redux';
 
 // import './App.css';
 import PokemonList from '../../components/PokemonList';
 import SearchBox from '../../components/SearchBox';
 
 
-class AppContainer extends Component {
+export class AppContainer extends Component {
+    static propTypes = {
+        handlePokemonInput: func.isRequired,
+        removeType: func.isRequired,
+        requestDetailInfo: func.isRequired,
+        handleTypeClick: func.isRequired,
+        pokemonsReducer: object
+    };
+
     render() {
         const {
             pokemonShowArray,
             isLoading,
             isError,
             pokemonsDetail,
+            typeName
         } = this.props.pokemonsReducer;
+
+        const {
+            handlePokemonInput,
+            removeType,
+            requestDetailInfo,
+            handleTypeClick
+        } = this.props;
+
         return (
             <div className="App">
                 <SearchBox
-                    handlePokemonInput={this.props.handlePokemonInput}
+                    handlePokemonInput={handlePokemonInput}
                 />
                 {
                     isLoading &&
                         <span>is loading</span>
+                }
+                {
+                    typeName &&
+                        <span
+                            className="type-name"
+                            onClick={removeType}
+                        >
+                            {typeName}
+                        </span>
                 }
                 {
                     isError &&
@@ -31,7 +57,8 @@ class AppContainer extends Component {
                 <PokemonList
                     pokemonArray={pokemonShowArray || []}
                     pokemonsDetail={pokemonsDetail || new Map()}
-                    requestDetailInfo={this.props.requestDetailInfo}
+                    requestDetailInfo={requestDetailInfo}
+                    handleTypeClick={handleTypeClick}
                 />
             </div>
         );
@@ -48,6 +75,12 @@ const mapDispatchToProps = dispatch => ({
     },
     handlePokemonInput: (inputValue) => {
         dispatch({type: 'HANDLE_POKEMON_INPUT', payload: inputValue})
+    },
+    handleTypeClick: (type) => {
+        dispatch({type: 'HANDLE_TYPE_CLICK', payload: type})
+    },
+    removeType: () => {
+        dispatch({type: 'REMOVE_TYPE'})
     }
 });
 

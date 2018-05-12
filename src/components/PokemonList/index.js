@@ -9,6 +9,7 @@ class PokemonList extends Component {
         pokemonArray: array.isRequired,
         pokemonsDetail: object.isRequired,
         requestDetailInfo: func.isRequired,
+        handleTypeClick: func.isRequired,
     };
 
     state = {
@@ -23,7 +24,12 @@ class PokemonList extends Component {
     renderPokemonItems = () => {
         let items = [];
         const {activePage, perPage} = this.state;
-        const {pokemonArray, pokemonsDetail, requestDetailInfo} = this.props;
+        const {
+            pokemonArray,
+            pokemonsDetail,
+            requestDetailInfo,
+            handleTypeClick
+        } = this.props;
 
         let startIndex = (activePage - 1) * perPage;
         let finishIndex = startIndex + perPage;
@@ -36,6 +42,7 @@ class PokemonList extends Component {
                     pokemon={item}
                     pokemonDetail={pokemonsDetail.get(item.name)}
                     requestDetailInfo={requestDetailInfo}
+                    handleTypeClick={handleTypeClick}
                 />
             )
         }

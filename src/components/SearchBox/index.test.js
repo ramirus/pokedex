@@ -20,7 +20,7 @@ describe("SearchBox", () => {
 
     beforeEach(() => {
         props = {
-            handlePokemonSubmit: () => {},
+            handlePokemonInput: () => {},
         };
         mountedScreen = undefined;
     });
@@ -34,7 +34,7 @@ describe("SearchBox", () => {
         const submitFunc = jest.fn();
 
         beforeEach(() => {
-            props.handlePokemonSubmit = submitFunc;
+            props.handlePokemonInput = submitFunc;
         });
 
         it('input change', () => {
@@ -57,6 +57,20 @@ describe("SearchBox", () => {
             setTimeout(() => {
                 expect(submitFunc).toHaveBeenCalled();
             }, 500);
+            jest.runAllTimers();
+        });
+
+        it('clean input after remove button click', () => {
+            jest.useFakeTimers();
+            const button = appScreen().find(".search-input-clean");
+            const input = appScreen().find("input");
+            const message = 'Test message';
+            input.simulate('change', { target: { value: message } });
+            setTimeout(() => {
+                expect(appScreen().state('value')).toEqual(message);
+            }, 500);
+            button.simulate('click');
+            expect(appScreen().state('value')).toEqual('');
             jest.runAllTimers();
         });
     })

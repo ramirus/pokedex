@@ -22,7 +22,8 @@ describe("PokemonItem", () => {
         props = {
             pokemon: {},
             requestDetailInfo: () => {},
-            pokemonDetail: {},
+            handleTypeClick: () => {},
+            pokemonDetail: undefined,
         };
         mountedScreen = undefined;
     });
@@ -39,15 +40,41 @@ describe("PokemonItem", () => {
             props = {
                 pokemon: {},
                 requestDetailInfo: requestFunc,
-                pokemonDetail: {},
+                pokemonDetail: undefined,
+                handleTypeClick: () => {},
             };
         });
 
-        it('call requestFunc after mounting', () => {
+        it('call requestFunc after mounting if pokemonDetail is undefined', () => {
             appScreen().instance().componentDidMount();
             expect(requestFunc).toHaveBeenCalled();
         });
 
+    });
+
+    describe('PokemonItem', () => {
+        const requestFunc = jest.fn();
+
+        beforeEach(() => {
+            props = {
+                pokemon: {},
+                requestDetailInfo: requestFunc,
+                handleTypeClick: () => {},
+                pokemonDetail: {
+                    'name': 'test',
+                    'sprites': {
+                        'front_default': ''
+                    },
+                    'types': [],
+                    'stats': []
+                },
+            };
+        });
+
+        it('do not call requestFunc after mounting if pokemonDetail is defined', () => {
+            appScreen().instance().componentDidMount();
+            expect(requestFunc).not.toHaveBeenCalled();
+        });
+
     })
-})
-;
+});

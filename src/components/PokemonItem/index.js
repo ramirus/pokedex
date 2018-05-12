@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import {object, func} from 'prop-types';
 
+import './index.css';
+
 class PokemonItem extends Component {
     static propTypes = {
         pokemon: object.isRequired,
         requestDetailInfo: func.isRequired,
-        pokemonDetail: object.isRequired
+        handleTypeClick: func.isRequired,
+        pokemonDetail: object
     };
 
     componentDidMount () {
-        const {requestDetailInfo, pokemon, pokemonDetail} = this.props;
+        const {
+            requestDetailInfo,
+            pokemon,
+            pokemonDetail,
+        } = this.props;
         // check if data already loaded
         if(!pokemonDetail) {
             requestDetailInfo(pokemon.url);
@@ -19,13 +26,17 @@ class PokemonItem extends Component {
     renderPokemonDetail = (pokemonDetail) => (
         <div className="pokemon-detail">
             <img src={pokemonDetail.sprites.front_default} alt={pokemonDetail.name}/>
-            <h3>{pokemonDetail.name}</h3>
+            <h3 className="pokemon-name">{pokemonDetail.name}</h3>
             {
                 pokemonDetail.types.map(item => (
-                    <span key={item.type.name}>{item.type.name}</span>
+                    <span
+                        key={item.type.name}
+                        className="pokemon-type"
+                        onClick={() => this.props.handleTypeClick(item.type)}
+                    >{item.type.name}</span>
                 ))
             }
-            <dl>
+            <dl className="pokemon-stats">
                 Stats: <br/>
                 {
                     pokemonDetail.stats.map(item => [
@@ -38,7 +49,7 @@ class PokemonItem extends Component {
     );
 
     render() {
-        const {pokemon, pokemonDetail} = this.props;
+        const {pokemonDetail} = this.props;
         return (
             <div className="pokemon-box">
                 {

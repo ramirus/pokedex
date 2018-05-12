@@ -19,13 +19,31 @@ class SearchBox extends Component {
         this.props.handlePokemonInput(value);
     };
 
+    handleCleanInput = (e) => {
+        e.preventDefault();
+        this.setState({
+            value: ''
+        });
+        this.props.handlePokemonInput('');
+    };
+
     render() {
         return (
-            <DebounceInput
-                debounceTimeout={300}
-                onChange={e => this.handleInput(e)}
-                placeholder="Input pokemon name"
-            />
+            <div className="search-box">
+                <DebounceInput
+                    debounceTimeout={300}
+                    onChange={e => this.handleInput(e)}
+                    value={this.state.value}
+                    placeholder="Input pokemon name"
+                />
+                <a
+                    onClick={(e) => this.handleCleanInput(e)}
+                    className="search-input-clean"
+                    role="button"
+                    href="#"
+                >x</a>
+            </div>
+
         );
     }
 }

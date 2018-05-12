@@ -1,9 +1,8 @@
 import { combineReducers } from 'redux'
 import * as actions from '../actions'
 
-function filterArray(state, filter) {
-    let pokemons = state.pokemonAllArray;
-    console.log(pokemons.filter(item => item.name.includes(filter)));
+function filterArray(state, filter = '', array) {
+    let pokemons = array ? array : state.pokemonAllArray;
     return pokemons.filter(item => item.name.includes(filter));
 }
 
@@ -31,7 +30,31 @@ function pokemonsReducer(state = { pokemonsDetail: new Map()}, action) {
         case actions.HANDLE_POKEMON_INPUT:
             return {...state,
                 filterValue: action.payload,
-                pokemonShowArray: filterArray(state, action.payload)
+                pokemonShowArray: filterArray(state, action.payload, state.pokemonTypeArray)
+            };
+        case actions.REQUEST_TYPE_INFO:
+            return {...state,
+                isLoading: true,
+            };
+        case actions.RECEIVE_TYPE_INFO:
+            console.log(action.payload);
+            let pokemonTypeArray = action.payload.pokemon.map(item => item.pokemon);
+            return {...state,
+                pokemonTypeArray: pokemonTypeArray,
+                typeName: action.payload.name,
+                pokemonShowArray: filterArray(state, state.filterValue, pokemonTypeArray),
+                isLoading: false
+            };
+        case actions.REQUEST_TYPE_INFO_FAILED:
+            return {...state,
+                isError: true,
+                isLoading: false
+            };
+        case actions.REMOVE_TYPE:
+            return {...state,
+                pokemonTypeArray: [],
+                typeName: '',
+                pokemonShowArray: filterArray(state, state.filterValue),
             };
         default:
             return state

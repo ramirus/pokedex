@@ -1,0 +1,11 @@
+.pokemon {
+
+  &-type {
+    padding: 10px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

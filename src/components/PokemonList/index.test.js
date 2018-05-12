@@ -23,6 +23,7 @@ describe("PokemonList", () => {
             pokemonArray: [],
             pokemonsDetail: new Map(),
             requestDetailInfo: () => {},
+            handleTypeClick: () => {},
         };
         mountedScreen = undefined;
     });
@@ -39,8 +40,12 @@ describe("PokemonList", () => {
 
     describe('pokemon-list', () => {
         const pokemonArray = [
-            {},
-            {}
+            {
+                name: '1'
+            },
+            {
+                name: '2'
+            }
         ];
 
         beforeEach(() => {
@@ -53,5 +58,4 @@ describe("PokemonList", () => {
         });
 
     })
-})
-;
+});
