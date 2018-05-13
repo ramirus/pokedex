@@ -20,8 +20,6 @@ class PieChart extends Component {
             'value': item.base_stat
         }));
 
-        console.log(data);
-
         let pie = d3.pie()
             .value(function (d) {
                 return d.value;
