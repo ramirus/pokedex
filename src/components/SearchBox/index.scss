@@ -1,0 +1,33 @@
+.search-box {
+  flex: 1 100%;
+  padding: 10px;
+  background-color: #F07B71;
+  display: flex;
+  position: relative;
+
+  input {
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 10px;
+    flex: 1 100%;
+    font-size: 16px;
+
+    &:focus {
+      outline: none;
+      border: 2px solid #3BC2F7;
+    }
+  }
+
+  .search-input-clean {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    text-decoration: none;
+    color: #DDDDDD;
+    font-size: 25px;
+
+    &:hover {
+      color: #464646;
+    }
+  }
+}

@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import {array, object, func} from 'prop-types';
+import {array, object, func, bool} from 'prop-types';
 import Pagination from "react-js-pagination";
 
+import './index.css';
 import PokemonItem from '../PokemonItem';
+import LoadingScreen from '../../components/LoadingScreen';
 
 class PokemonList extends Component {
     static propTypes = {
@@ -10,6 +12,7 @@ class PokemonList extends Component {
         pokemonsDetail: object.isRequired,
         requestDetailInfo: func.isRequired,
         handleTypeClick: func.isRequired,
+        isLoading: bool.isRequired,
     };
 
     state = {
@@ -33,9 +36,9 @@ class PokemonList extends Component {
 
         let startIndex = (activePage - 1) * perPage;
         let finishIndex = startIndex + perPage;
-        for(let i = startIndex; i < finishIndex; i++) {
+        for (let i = startIndex; i < finishIndex; i++) {
             let item = pokemonArray[i];
-            if(!pokemonArray[i]) break;
+            if (!pokemonArray[i]) break;
             items.push(
                 <PokemonItem
                     key={item.name}
@@ -50,19 +53,27 @@ class PokemonList extends Component {
     };
 
     render() {
-        const {pokemonArray} = this.props;
+        const {pokemonArray, isLoading} = this.props;
         let items = this.renderPokemonItems();
-        return (
-            <div className="pokemon-list">
+        return [
+            <div
+                key='pokemon-list'
+                className="pokemon-list"
+            >
+                {
+                    isLoading && <LoadingScreen/>
+                }
                 {items}
-                <Pagination
-                    activePage={this.state.activePage}
-                    itemsCountPerPage={this.state.perPage}
-                    totalItemsCount={pokemonArray.length}
-                    onChange={this.handlePageChange}
-                />
-            </div>
-        );
+            </div>,
+            <Pagination
+                key="pagination"
+                activePage={this.state.activePage}
+                itemsCountPerPage={this.state.perPage}
+                totalItemsCount={pokemonArray.length}
+                onChange={this.handlePageChange}
+                hideNavigation={true}
+            />
+        ];
     }
 }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {object, func} from 'prop-types';
 
 import './index.css';
+import LoadingScreen from '../../components/LoadingScreen';
 
 class PokemonItem extends Component {
     static propTypes = {
@@ -25,24 +26,35 @@ class PokemonItem extends Component {
 
     renderPokemonDetail = (pokemonDetail) => (
         <div className="pokemon-detail">
-            <img src={pokemonDetail.sprites.front_default} alt={pokemonDetail.name}/>
             <h3 className="pokemon-name">{pokemonDetail.name}</h3>
-            {
-                pokemonDetail.types.map(item => (
-                    <span
-                        key={item.type.name}
-                        className="pokemon-type"
-                        onClick={() => this.props.handleTypeClick(item.type)}
-                    >{item.type.name}</span>
-                ))
-            }
-            <dl className="pokemon-stats">
-                Stats: <br/>
+            <img
+                className="pokemon-ava"
+                src={pokemonDetail.sprites.front_default}
+                alt={pokemonDetail.name}
+            />
+            <div className="pokemon-type-box">
                 {
-                    pokemonDetail.stats.map(item => [
-                        <dt key={item.stat.name}>{item.stat.name}</dt>,
-                        <dd key={item.base_stat}>{item.base_stat}</dd>
-                    ])
+                    pokemonDetail.types.map(item => (
+                        <span
+                            key={item.type.name}
+                            className="pokemon-type"
+                            onClick={() => this.props.handleTypeClick(item.type)}
+                        >{item.type.name}</span>
+                    ))
+                }
+            </div>
+
+            <dl className="pokemon-stats">
+                {
+                    pokemonDetail.stats.map(item =>
+                        <div
+                            key={item.stat.name}
+                            className="pokemon-stat"
+                        >
+                            <dt>{item.stat.name}</dt>
+                            <dd>{item.base_stat}</dd>
+                        </div>
+                    )
                 }
             </dl>
         </div>
@@ -56,7 +68,7 @@ class PokemonItem extends Component {
                     pokemonDetail ?
                         this.renderPokemonDetail(pokemonDetail)
                         :
-                        <span>is loading</span>
+                        <LoadingScreen/>
                 }
             </div>
         );

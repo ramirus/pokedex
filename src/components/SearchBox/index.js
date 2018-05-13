@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {func} from 'prop-types';
 import {DebounceInput} from 'react-debounce-input';
 
+import './index.css';
+
 class SearchBox extends Component {
     static propTypes = {
         handlePokemonInput: func.isRequired,

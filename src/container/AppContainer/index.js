@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import {func, object} from 'prop-types';
 import {connect} from 'react-redux';
 
-// import './App.css';
+import './index.css';
 import PokemonList from '../../components/PokemonList';
 import SearchBox from '../../components/SearchBox';
+
 
 
 export class AppContainer extends Component {
@@ -33,22 +34,22 @@ export class AppContainer extends Component {
         } = this.props;
 
         return (
-            <div className="App">
+            <div className="app">
                 <SearchBox
                     handlePokemonInput={handlePokemonInput}
                 />
-                {
-                    isLoading &&
-                        <span>is loading</span>
-                }
+
                 {
                     typeName &&
-                        <span
-                            className="type-name"
-                            onClick={removeType}
-                        >
-                            {typeName}
-                        </span>
+                        <div className="type-filter">
+                            <span
+                                className="type-filter-label"
+                                onClick={removeType}
+                            >
+                                {typeName}
+                            </span>
+                        </div>
+
                 }
                 {
                     isError &&
@@ -59,6 +60,7 @@ export class AppContainer extends Component {
                     pokemonsDetail={pokemonsDetail || new Map()}
                     requestDetailInfo={requestDetailInfo}
                     handleTypeClick={handleTypeClick}
+                    isLoading={isLoading}
                 />
             </div>
         );

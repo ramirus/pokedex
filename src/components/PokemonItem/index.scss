@@ -1,11 +1,73 @@
 .pokemon {
 
+  &-box {
+    position: relative;
+    min-width: 150px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 10px 0;
+    height: 455px;
+    overflow: hidden;
+  }
+
+  &-detail {
+    text-align: center;
+  }
+
+  &-name {
+    color: #A4A5A5;
+    text-transform: uppercase;
+  }
+
+  &-ava {
+    border: 5px solid #ddd;
+    border-radius: 50%;
+    padding: 25px;
+    margin-bottom: 15px;
+  }
+
   &-type {
-    padding: 10px;
+    padding: 5px 10px;
+    margin: 0 5px;
     cursor: pointer;
+    background-color: #68B5E0;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
 
     &:hover {
       opacity: 0.8;
+    }
+  }
+
+  &-stat {
+    padding: 5px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 5px;
+  }
+
+  &-stats {
+    border-top: 4px solid #ddd;
+    padding-top: 20px;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    & > * {
+      margin-bottom: 10px;
+    }
+
+    dt {
+      text-transform: uppercase;
+      color: #ddd;
+      font-size: 12px;
+      align-self: end;
+    }
+
+    dd {
+      color: #A4A5A5;
+      margin: 0;
     }
   }
 }
