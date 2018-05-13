@@ -3,6 +3,7 @@ import {object, func} from 'prop-types';
 
 import './index.css';
 import LoadingScreen from '../../components/LoadingScreen';
+import PieChart from '../../components/PieChart';
 
 class PokemonItem extends Component {
     static propTypes = {
@@ -57,6 +58,9 @@ class PokemonItem extends Component {
                     )
                 }
             </dl>
+            <PieChart
+                pokemonStats={pokemonDetail.stats}
+            />
         </div>
     );
 

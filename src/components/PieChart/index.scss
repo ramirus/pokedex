@@ -1,0 +1,36 @@
+.pie-chart {
+  position: relative;
+  width: 156px;
+  margin: 0 auto;
+
+  path {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .tooltip {
+    color: #A4A5A5;
+    display: none;
+    font-size: 12px;
+    left: 49px;
+    position: absolute;
+    text-align: center;
+    top: 55px;
+    width: 60px;
+    z-index: 10;
+
+    .label {
+      text-transform: uppercase;
+    }
+
+    .value {
+      color: #464646;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+  }
+}
+
