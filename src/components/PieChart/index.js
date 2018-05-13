@@ -57,7 +57,6 @@ class PieChart extends Component {
             .attr("d", arc);
 
         path.on('mouseover', function (d) {
-            console.log(d);
             tooltip.select('.label').html(d.data.label);
             tooltip.select('.value').html(d.data.value);
             tooltip.style('display', 'block');
