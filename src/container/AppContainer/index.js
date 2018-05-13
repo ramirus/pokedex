@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {func, object} from 'prop-types';
 import {connect} from 'react-redux';
 
-import './index.css';
+import './index.scss';
 import PokemonList from '../../components/PokemonList';
 import SearchBox from '../../components/SearchBox';
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {object, func} from 'prop-types';
 
-import './index.css';
+import './index.scss';
 import LoadingScreen from '../../components/LoadingScreen';
 import PieChart from '../../components/PieChart';
 

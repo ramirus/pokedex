@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {func} from 'prop-types';
 import {DebounceInput} from 'react-debounce-input';
 
-import './index.css';
+import './index.scss';
 
 class SearchBox extends Component {
     static propTypes = {

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {array, object, func, bool} from 'prop-types';
 import Pagination from "react-js-pagination";
 
-import './index.css';
+import './index.scss';
 import PokemonItem from '../PokemonItem';
 import LoadingScreen from '../../components/LoadingScreen';
 

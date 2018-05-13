@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {array} from 'prop-types';
 
-import './index.css';
+import './index.scss';
 import * as d3 from "d3";
 
 class PieChart extends Component {
