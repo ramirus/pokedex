@@ -88,6 +88,14 @@ class PokemonList extends Component {
         </div>
     );
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+        let currentPokemons = prevState.activePage * prevState.perPage;
+        if(nextProps.pokemonArray.length < currentPokemons) {
+            return {activePage: 1};
+        }
+        return null;
+    }
+
     render() {
         const {pokemonArray, isLoading} = this.props;
         const {activePage, perPage} = this.state;
