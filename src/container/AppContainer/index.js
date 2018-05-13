@@ -53,7 +53,7 @@ export class AppContainer extends Component {
                 }
                 {
                     isError &&
-                    <span>is error</span>
+                    <div className="error">is error</div>
                 }
                 <PokemonList
                     pokemonArray={pokemonShowArray || []}
