@@ -38,7 +38,7 @@ export function* fetchPokemons() {
     yield put(actions.requestPokemons());
     const pokemons = yield call(getApi, URL + 'pokemon/?limit=1000');
     if (pokemons === 'error') {
-        put(actions.requestPokemonsFailed());
+        yield put(actions.requestPokemonsFailed());
     } else {
         yield put(actions.receivePokemons(pokemons.results));
     }
@@ -48,7 +48,7 @@ export function* requestTypeInfo(action) {
     yield put(actions.requestTypeInfo());
     const pokemons = yield call(getApi, action.payload.url);
     if (pokemons === 'error') {
-        put(actions.requestTypeInfoFailed());
+        yield put(actions.requestTypeInfoFailed());
     } else {
         yield put(actions.receiveTypeInfo(pokemons));
     }
