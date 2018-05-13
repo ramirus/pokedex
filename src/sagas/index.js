@@ -25,7 +25,11 @@ export function* requestDetailInfo(action) {
     let pokemonDetailInfo = yield call(getFromLocalStorage, action.payload.name);
     if(!pokemonDetailInfo) {
         pokemonDetailInfo = yield call(getApi, action.payload.url);
-        yield call(setToLocalStorage, pokemonDetailInfo);
+        try {
+            yield call(setToLocalStorage, pokemonDetailInfo);
+        } catch (e) {
+            console.log('Local storage is full');
+        }
     }
     yield put(actions.receivePokemonDetailInfo(pokemonDetailInfo));
 }
