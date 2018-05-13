@@ -27,4 +27,40 @@
   }
 }
 
+.pagination-box {
+  width: 100%;
+}
 
+.pagination-per-page-box {
+  display: inline-block;
+  float: right;
+  margin-right: 10px;
+
+  span {
+    color: #464646;
+  }
+}
+
+.pagination,
+.pagination-per-page {
+  list-style: none;
+  display: inline-block;
+
+  li {
+    display: inline-block;
+    margin: 0 5px;
+
+    a {
+      text-decoration: none;
+      color: #464646;
+
+      &:hover {
+        color: #A4A5A5;
+      }
+    }
+
+    &.active a {
+      color: #F07B71;
+    }
+  }
+}

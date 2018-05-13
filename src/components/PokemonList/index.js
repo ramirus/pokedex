@@ -17,11 +17,18 @@ class PokemonList extends Component {
 
     state = {
         activePage: 1,
-        perPage: 10,
+        perPage: 12,
     };
 
     handlePageChange = (pageNumber) => {
         this.setState({activePage: pageNumber});
+    };
+
+    setPerPage = (e, perPage) => {
+      e.preventDefault();
+      this.setState({
+          perPage: perPage
+      })
     };
 
     renderPokemonItems = () => {
@@ -52,8 +59,38 @@ class PokemonList extends Component {
         return items;
     };
 
+    renderPerPage = (perPage) => (
+        <div
+            key="pagination-per-page-box"
+            className="pagination-per-page-box"
+        >
+            <span>Per page:</span>
+            <ul className="pagination-per-page">
+                <li className={perPage === 12 ? 'active' : ''}>
+                    <a
+                        href="#"
+                        onClick={(e) => this.setPerPage(e, 12)}
+                    >12</a>
+                </li>
+                <li className={perPage === 24 ? 'active' : ''}>
+                    <a
+                        href="#"
+                        onClick={(e) => this.setPerPage(e, 24)}
+                    >24</a>
+                </li>
+                <li className={perPage === 36 ? 'active' : ''}>
+                    <a
+                        href="#"
+                        onClick={(e) => this.setPerPage(e, 36)}
+                    >36</a>
+                </li>
+            </ul>
+        </div>
+    );
+
     render() {
         const {pokemonArray, isLoading} = this.props;
+        const {activePage, perPage} = this.state;
         let items = this.renderPokemonItems();
         return [
             <div
@@ -65,14 +102,28 @@ class PokemonList extends Component {
                 }
                 {items}
             </div>,
-            <Pagination
-                key="pagination"
-                activePage={this.state.activePage}
-                itemsCountPerPage={this.state.perPage}
-                totalItemsCount={pokemonArray.length}
-                onChange={this.handlePageChange}
-                hideNavigation={true}
-            />
+            <div
+                className="pagination-box"
+                key="pagination-box"
+            >
+                {
+                    pokemonArray.length !== 0 &&
+                    [
+                        <Pagination
+                            key="pagination"
+                            activePage={activePage}
+                            itemsCountPerPage={perPage}
+                            totalItemsCount={pokemonArray.length}
+                            onChange={this.handlePageChange}
+                            hideNavigation={true}
+                            firstPageText='⟨⟨'
+                            lastPageText='⟩⟩'
+                        />,
+                        this.renderPerPage(perPage)
+                    ]
+                }
+
+            </div>
         ];
     }
 }
